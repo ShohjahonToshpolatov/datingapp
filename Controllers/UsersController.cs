@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
+
     public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
@@ -28,7 +30,10 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
-            return await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
+            if (user is null) return NotFound();
+            return user;
+
         }
     }
 }
