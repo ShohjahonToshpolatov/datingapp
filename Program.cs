@@ -1,8 +1,11 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
@@ -10,44 +13,47 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.AllowAnyOrigin()
 
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                      });
-});
+builder.Services.AddCors();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+// JWT AUTH
+var tokenKey = builder.Configuration["TokenKey"] ?? throw new System.InvalidOperationException("TokenKey configuration is missing.");
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(tokenKey)
+            ),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Seed database (development only)
+// Migrate + Seed
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<DataContext>();
-        await context.Database.MigrateAsync();
-        await Seed.SeedUsers(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database.");
-    }
-}
-app.UseCors(MyAllowSpecificOrigins);
-// HTTP pipeline
-if (app.Environment.IsDevelopment())
-{
+    var context = services.GetRequiredService<DataContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
 }
 
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
