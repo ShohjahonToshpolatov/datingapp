@@ -1,14 +1,19 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './_interceptors/auth.interceptor';
-
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    provideHttpClient(
-      withInterceptors([authInterceptor])
-    )
+    provideAnimations(),
+    importProvidersFrom(
+      ToastrModule.forRoot({
+        positionClass: 'toast-bottom-right',
+        timeOut: 3000,
+        preventDuplicates: true,
+      })
+    ),
+    importProvidersFrom(
+      BsDropdownModule
+    ),
   ]
 };

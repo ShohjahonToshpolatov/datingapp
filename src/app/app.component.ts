@@ -1,28 +1,27 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { NavComponent } from "./nav/nav.component";
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
-import { HomeComponent } from './home/home.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [NavComponent, NavComponent, HomeComponent],
+  imports: [NavComponent, NavComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'client'
-  users: any;
-  accountService = inject(AccountService);
+  users: any
+  accountService = inject(AccountService)
 
   ngOnInit(): void {
-    this.setCurrentUser();
+    this.setCurrentUser()
   }
 
   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user')!);
-    this.accountService.setCurrentUser(user);
+    this.accountService.setCurrentUser(user)
   }
 
 

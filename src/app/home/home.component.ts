@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterComponent } from '../register/register.component';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +17,6 @@ export class HomeComponent {
   ngOnInit(): void {
 
   }
-
-
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;

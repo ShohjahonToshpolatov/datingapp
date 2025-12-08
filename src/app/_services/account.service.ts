@@ -20,19 +20,8 @@ export class AccountService {
     return user;
   }
 
-  login(model: User): Observable<any> {
+  login(model: any): Observable<any> {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
-      map((user: any) => {
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
-        }
-      })
-    )
-  }
-
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: any) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -42,6 +31,19 @@ export class AccountService {
       })
     );
   }
+
+  register(model: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'account/register', model).pipe(
+      map((user: any) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user); // avtomatik login
+        }
+        return user;
+      })
+    );
+  }
+
 
   setCurrentUser(user: User) {
     this.currentUserSource.next(user);
