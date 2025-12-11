@@ -6,7 +6,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const accountService = inject(AccountService);
     let token = null;
 
-    // localStorage’dan o‘qiydi (synchronous)
     const userString = localStorage.getItem('user');
     if (userString) {
         const user = JSON.parse(userString);

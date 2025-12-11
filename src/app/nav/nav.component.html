@@ -17,8 +17,10 @@
                 </li>
             </ng-container>
             }
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/error" routerLinkActive="active">Errors</a>
+            </li>
         </ul>
-
 
         @if ((accountService.currentUser$ | async); as user) {
         <li ngbDropdown class="nav-item dropdown" style="list-style: none;">

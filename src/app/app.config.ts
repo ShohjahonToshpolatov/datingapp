@@ -2,9 +2,12 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { routes } from './app.routes';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
     importProvidersFrom(
       ToastrModule.forRoot({
         positionClass: 'toast-bottom-right',
@@ -12,8 +15,13 @@ export const appConfig: ApplicationConfig = {
         preventDuplicates: true,
       })
     ),
-    importProvidersFrom(
-      BsDropdownModule
-    ),
+
+    provideAnimations(),
+
+    importProvidersFrom(BsDropdownModule),
+
+    provideHttpClient(withInterceptorsFromDi()),
+
+    provideRouter(routes)
   ]
 };
