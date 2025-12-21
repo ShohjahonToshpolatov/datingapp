@@ -8,7 +8,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -18,7 +17,6 @@ builder.Services.AddCors();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-// JWT AUTH
 var tokenKey = builder.Configuration["TokenKey"] ?? throw new System.InvalidOperationException("TokenKey configuration is missing.");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -38,7 +36,6 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Migrate + Seed
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

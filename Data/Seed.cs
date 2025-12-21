@@ -1,39 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Text;
 using API.Entities;
 
 namespace API.Data
 {
-    public static class Seed
+    public class Seed
     {
         public static async Task SeedUsers(DataContext context)
         {
-            // Barcha mavjud userlarni o'chirish
-            var allUsers = await context.Users.ToListAsync();
-            if (allUsers.Any())
+            if (context.Users.Any()) return;
+
+            var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
+            var users = System.Text.Json.JsonSerializer.Deserialize<List<AppUser>>(userData);
+
+            if (users is null) return;
+
+            foreach (var user in users)
             {
-                context.Users.RemoveRange(allUsers);
-                await context.SaveChangesAsync();
+                using var hmac = new HMACSHA512();
+
+                user.UserName = user.UserName.ToLower();
+                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
+                user.PasswordSalt = hmac.Key;
+
+                context.Users.Add(user);
             }
 
-            // Yangi user yaratish
-            var password = "testuser";
-            var username = "testuser1";
-
-            using var hmac = new HMACSHA512();
-            var user = new AppUser
-            {
-                UserName = username,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
-                PasswordSalt = hmac.Key
-            };
-
-            context.Users.Add(user);
             await context.SaveChangesAsync();
         }
     }
