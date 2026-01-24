@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^19.2.15",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@kolkov/ngx-gallery": "^2.0.1",
     "@ng-bootstrap/ng-bootstrap": "^18.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",

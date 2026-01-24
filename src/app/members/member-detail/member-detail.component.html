@@ -1,1 +1,117 @@
-<p>member-detail works!</p>
+@if (member) {
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <img [src]="member.photoUrl || 'assets/user.png'" [alt]="member.knownAs" class="card-img-top img-thumbnail">
+
+            <div class="card-body">
+                <div><strong>Location:</strong>
+                    <p>{{member.city}}, {{member.country}}</p>
+                </div>
+
+                <div><strong>Age:</strong>
+                    <p>{{member.age}}</p>
+                </div>
+
+                <div><strong>Last Active:</strong>
+                    <p>{{member.lastActive}}</p>
+                </div>
+
+                <div><strong>Member since:</strong>
+                    <p>{{member.created}}</p>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary">Like</button>
+                    <button class="btn btn-success">Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+        <!-- TAB HEADERS -->
+        <ul class="nav nav-tabs member-tabset">
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='about'" (click)="setTab('about')">
+                    About {{member.knownAs}}
+                </button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='interests'" (click)="setTab('interests')">
+                    Interests
+                </button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='photos'" (click)="setTab('photos')">
+                    Photos
+                </button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='messages'" (click)="setTab('messages')">
+                    Messages
+                </button>
+            </li>
+        </ul>
+
+        <!-- TAB CONTENT -->
+        <div class="tab-panel">
+
+            @if (activeTab === 'about') {
+            <h4>Description</h4>
+            <p>{{member.introduction}}</p>
+
+            <h4>Looking for</h4>
+            <p>{{member.lookingFor}}</p>
+            }
+
+            @if (activeTab === 'interests') {
+            <h4>Interests</h4>
+            <p>{{member.interests}}</p>
+            }
+
+            <!-- ✅ Udemy-style Gallery -->
+            @if (activeTab === 'photos') {
+
+            @if (photos.length > 0) {
+
+            <div class="gallery">
+
+                <div class="gallery-main">
+                    <button class="gallery-nav left" type="button" (click)="prev()"
+                        aria-label="Previous photo">‹</button>
+
+                    <img class="gallery-image" [src]="photos[activeIndex]" alt="photo">
+
+                    <button class="gallery-nav right" type="button" (click)="next()" aria-label="Next photo">›</button>
+                </div>
+
+                <div class="gallery-thumbs">
+                    @for (url of photos; track url; let i = $index) {
+                    <button type="button" class="thumb" [class.active]="i === activeIndex" (click)="openPhoto(i)">
+                        <img [src]="url" alt="thumb">
+                    </button>
+                    }
+                </div>
+
+            </div>
+
+            } @else {
+            <p class="text-muted m-0">No photos yet.</p>
+            }
+            }
+
+            @if (activeTab === 'messages') {
+            <p>Messages will go here</p>
+            }
+
+        </div>
+    </div>
+</div>
+}
