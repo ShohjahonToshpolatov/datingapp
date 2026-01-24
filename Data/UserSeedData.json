@@ -13,8 +13,8 @@
         "Country": "Niue",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/67.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/67.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -32,8 +32,8 @@
         "Country": "French Guiana",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/50.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/50.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -51,8 +51,8 @@
         "Country": "Libya",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/70.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/70.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -70,8 +70,8 @@
         "Country": "Norway",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/83.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/83.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -89,8 +89,8 @@
         "Country": "Singapore",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/10.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/10.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -108,8 +108,8 @@
         "Country": "Viet Nam",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/68.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/68.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -127,8 +127,8 @@
         "Country": "Falkland Islands (Malvinas)",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/67.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/67.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -146,8 +146,8 @@
         "Country": "Nauru",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/90.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/90.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -165,8 +165,8 @@
         "Country": "Sudan",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/51.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/51.jpg",
+                "IsMain": true
             }
         ]
     },
@@ -184,8 +184,8 @@
         "Country": "Heard and McDonald Islands",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/26.jpg",
-                "isMain": true
+                "Url": "https://randomuser.me/api/portraits/women/26.jpg",
+                "IsMain": true
             }
         ]
     }
