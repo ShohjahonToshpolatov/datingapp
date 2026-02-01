@@ -18,10 +18,8 @@ export class MemberDetailComponent {
   route = inject(ActivatedRoute);
   memberService = inject(MembersService);
 
-  // ✅ Tabs
   activeTab: MemberTab = 'about';
 
-  // ✅ Photos
   photos: string[] = [];
   isModalOpen = false;
   activeIndex = 0;
@@ -41,7 +39,7 @@ export class MemberDetailComponent {
 
         console.log('member:', member);
         console.log('member.photos:', member.photos);
-        console.log('first photo:', member.photos?.[0]); // ✅ TO‘G‘RI JOY
+        console.log('first photo:', member.photos?.[0]);
 
         this.member = member;
 
@@ -52,8 +50,6 @@ export class MemberDetailComponent {
         console.log('mapped photos:', this.photos);
       });
   }
-
-
   openPhoto(i: number) {
     this.activeIndex = i;
   }
