@@ -1,0 +1,94 @@
+@if (member) {
+<div class="row">
+
+    <div class="col-4">
+        <h1>Your profile</h1>
+
+        <div class="card">
+            <img [src]="member.photoUrl || 'assets/user.png'" [alt]="member.knownAs" class="card-img-top img-thumbnail">
+
+            <div class="card-body">
+                <div><strong>Location:</strong>
+                    <p>{{member.city}}, {{member.country}}</p>
+                </div>
+
+                <div><strong>Age:</strong>
+                    <p>{{member.age}}</p>
+                </div>
+
+                <div><strong>Last Active:</strong>
+                    <p>{{member.lastActive}}</p>
+                </div>
+
+                <div><strong>Member since:</strong>
+                    <p>{{member.created}}</p>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-success btn-block" type="button" (click)="saveChanges()"
+                    [disabled]="!editForm?.dirty">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+        @if (editForm?.dirty) {
+        <div class="alert alert-info">
+            <strong>Information:</strong> You have made changes. Any unsaved changes will be lost
+        </div>
+        }
+
+        <ul class="nav nav-tabs member-tabset">
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='about'" type="button" (click)="setTab('about')">
+                    About {{member.knownAs}}
+                </button>
+            </li>
+
+            <li class="nav-item">
+                <button class="nav-link" [class.active]="activeTab==='photos'" type="button" (click)="setTab('photos')">
+                    Edit Photos
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-panel">
+
+            @if (activeTab === 'about') {
+            <form #editForm="ngForm" autocomplete="off">
+
+                <h4>Description</h4>
+                <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction"
+                    rows="6"></textarea>
+
+                <h4 class="mt-3">Looking for</h4>
+                <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+
+                <h4 class="mt-3">Interests</h4>
+                <textarea class="form-control" [(ngModel)]="member.interests" name="interests" rows="6"></textarea>
+
+                <h4 class="mt-3">Location Details</h4>
+                <div class="form-inline">
+                    <label class="me-2">City:</label>
+                    <input class="form-control me-3" type="text" [(ngModel)]="member.city" name="city">
+
+                    <label class="me-2">Country:</label>
+                    <input class="form-control" type="text" [(ngModel)]="member.country" name="country">
+                </div>
+
+            </form>
+            }
+
+            @if (activeTab === 'photos') {
+            <p>Photo edit will go here</p>
+            }
+
+        </div>
+    </div>
+
+</div>
+}

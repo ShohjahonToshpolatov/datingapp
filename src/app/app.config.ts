@@ -9,12 +9,13 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { routes } from './app.routes';
 import { jwtInterceptor } from './_interceptors/jwt.interceptor';
+import { loadingInterceptor } from './_interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
 
-    provideHttpClient(withInterceptors([jwtInterceptor])),
+    provideHttpClient(withInterceptors([jwtInterceptor, loadingInterceptor])),
     provideRouter(routes),
 
     importProvidersFrom(
