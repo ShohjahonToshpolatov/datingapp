@@ -48,7 +48,7 @@ namespace API.Controllers
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
             };
 
             return Ok(userDto);
@@ -60,7 +60,9 @@ namespace API.Controllers
             if (string.IsNullOrWhiteSpace(loginDto.Username) || string.IsNullOrWhiteSpace(loginDto.Password))
                 return BadRequest("Username va password bo‘sh bo‘lishi mumkin emas");
 
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            var user = await _context.Users
+            .Include(p => p.Photos)
+            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
             if (user is null) return BadRequest("Username mavjud emas");
 
@@ -77,7 +79,8 @@ namespace API.Controllers
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url ?? string.Empty
             };
 
             return Ok(userDto);

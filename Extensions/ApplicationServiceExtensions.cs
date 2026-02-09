@@ -23,7 +23,8 @@ namespace API.Extensions
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
-
+            services.Configure<SupabaseSettings>(config.GetSection("Supabase"));
+            services.AddScoped<IPhotoService, PhotoService>();
             return services;
         }
     }
