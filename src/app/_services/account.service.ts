@@ -9,6 +9,9 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
+  setMainPhoto(photoId: number) {
+    throw new Error('Method not implemented.');
+  }
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -25,8 +28,7 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((user: any) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -37,8 +39,7 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: any) => {
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user); // avtomatik login
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -47,6 +48,7 @@ export class AccountService {
 
 
   setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 

@@ -9,29 +9,21 @@
             @if (accountService.currentUser$ | async) {
             <ng-container>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/members" routerLinkActive="active">
-                        Matches
-                    </a>
+                    <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">
-                        Lists
-                    </a>
+                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">
-                        Messages
-                    </a>
+                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
                 </li>
             </ng-container>
             }
 
             <li class="nav-item">
-                <a class="nav-link" routerLink="/error" routerLinkActive="active">
-                    Errors
-                </a>
+                <a class="nav-link" routerLink="/error" routerLinkActive="active">Errors</a>
             </li>
         </ul>
 
@@ -39,21 +31,19 @@
         <ul class="navbar-nav">
             <li ngbDropdown class="nav-item dropdown">
 
-                <button class="nav-link dropdown-toggle btn btn-link" ngbDropdownToggle type="button"
-                    style="text-decoration: none;">
-                    Welcome {{ user.username | titlecase }}
+                <button class="nav-link dropdown-toggle btn btn-link d-flex align-items-center gap-2" ngbDropdownToggle
+                    type="button" style="text-decoration:none;">
+                    <img [src]="user.photoUrl || 'assets/user.png'" alt="user photo" class="rounded-circle"
+                        style="width:40px; height:40px; object-fit:cover;" />
+                    <span>Welcome {{ user.username | titlecase }}</span>
                 </button>
 
                 <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" routerLink="/member/edit">
-                        Edit Profile
-                    </a>
+                    <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
 
                     <div class="dropdown-divider"></div>
 
-                    <button class="dropdown-item" type="button" (click)="logout()">
-                        Logout
-                    </button>
+                    <button class="dropdown-item" type="button" (click)="logout()">Logout</button>
                 </div>
 
             </li>
@@ -68,9 +58,7 @@
             <input class="form-control me-2" name="password" [(ngModel)]="model.Password" type="password"
                 placeholder="Password" />
 
-            <button class="btn btn-success" type="submit">
-                Login
-            </button>
+            <button class="btn btn-success" type="submit">Login</button>
         </form>
         }
 

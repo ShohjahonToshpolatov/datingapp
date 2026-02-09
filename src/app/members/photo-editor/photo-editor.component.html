@@ -1,0 +1,38 @@
+@if (member) {
+<div class="row">
+
+    <div class="col-12 mb-3">
+        <div ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" class="card p-3 text-center"
+            [ngClass]="{ 'border-success': hasBaseDropZoneOver }" style="border: 2px dashed #28a745;">
+            <h5>Drag & drop photo here</h5>
+            <p>or</p>
+            <input type="file" ng2FileSelect [uploader]="uploader" />
+        </div>
+
+        <button class="btn btn-success mt-2" (click)="uploader.uploadAll()"
+            [disabled]="!uploader.getNotUploadedItems().length">
+            Upload
+        </button>
+    </div>
+
+    @for (photo of member.photos; track photo.id) {
+    <div class="col-6 col-md-4 col-lg-3 mb-3">
+        <div class="photo-card">
+            <img [src]="photo.url" alt="photo" />
+        </div>
+
+        <div class="d-flex justify-content-center gap-2 mt-2">
+            <button class="btn btn-sm btn-success" [disabled]="photo.isMain" (click)="setMainPhoto(photo)"
+                [ngClass]="photo.isMain ? 'btn-success' : 'btn-outline'">
+                Main
+            </button>
+
+            <button class="btn btn-sm btn-danger" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    }
+
+</div>
+}

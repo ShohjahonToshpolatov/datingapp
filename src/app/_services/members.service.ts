@@ -48,4 +48,12 @@ export class MembersService {
     if (member !== undefined) return of(member)
     return this.http.get<Member>(this.baseUrl + 'users/' + username, this.getHttpOptions());
   }
+
+  setMainPhoto(photoId: number): Observable<void> {
+    return this.http.put<void>(this.baseUrl + 'users/set-main-photo/' + photoId, {}, this.getHttpOptions());
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId)
+  }
 }
