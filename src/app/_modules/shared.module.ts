@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    BsDropdownModule,
-    ToastrModule
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot()
   ],
-
   exports: [
     BsDropdownModule,
-    ToastrModule,
+    BsDatepickerModule,
+    ToastrModule
   ]
 })
 export class SharedModule { }

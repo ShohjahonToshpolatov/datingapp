@@ -10,7 +10,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { routes } from './app.routes';
 import { jwtInterceptor } from './_interceptors/jwt.interceptor';
 import { loadingInterceptor } from './_interceptors/loading.interceptor';
+import {
+  ReactiveFormsModule
 
+} from '@angular/forms';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
@@ -19,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
 
     importProvidersFrom(
+      ReactiveFormsModule,
       ToastrModule.forRoot({
         positionClass: 'toast-bottom-right',
         timeOut: 3000,
