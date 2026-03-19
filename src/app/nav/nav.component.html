@@ -35,7 +35,7 @@
                     type="button" style="text-decoration:none;">
                     <img [src]="user.photoUrl || 'assets/user.png'" alt="user photo" class="rounded-circle"
                         style="width:40px; height:40px; object-fit:cover;" />
-                    <span>Welcome {{ user.username | titlecase }}</span>
+                    <span>Welcome {{ user.knownAs }}</span>
                 </button>
 
                 <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">

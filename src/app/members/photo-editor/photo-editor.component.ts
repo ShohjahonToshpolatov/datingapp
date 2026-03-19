@@ -28,7 +28,7 @@ export class PhotoEditorComponent implements OnInit {
 
   ngOnInit(): void {
     const u = this.accountService.currentUserValue;
-    if (!u) return; // safety
+    if (!u) return;
     this.user = u;
 
     this.initializeUploader();

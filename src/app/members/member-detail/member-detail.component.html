@@ -14,11 +14,11 @@
                 </div>
 
                 <div><strong>Last Active:</strong>
-                    <p>{{member.lastActive}}</p>
+                    <p>{{member.lastActive + 'Z' | timeago}}</p>
                 </div>
 
                 <div><strong>Member since:</strong>
-                    <p>{{member.created}}</p>
+                    <p>{{member.created | date:'dd MM yyyy'}}</p>
                 </div>
             </div>
 
@@ -33,7 +33,6 @@
 
     <div class="col-8">
 
-        <!-- TAB HEADERS -->
         <ul class="nav nav-tabs member-tabset">
             <li class="nav-item">
                 <button class="nav-link" [class.active]="activeTab==='about'" (click)="setTab('about')">
@@ -60,7 +59,6 @@
             </li>
         </ul>
 
-        <!-- TAB CONTENT -->
         <div class="tab-panel">
 
             @if (activeTab === 'about') {
@@ -76,7 +74,6 @@
             <p>{{member.interests}}</p>
             }
 
-            <!-- ✅ Udemy-style Gallery -->
             @if (activeTab === 'photos') {
 
             @if (photos.length > 0) {

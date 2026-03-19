@@ -8,13 +8,18 @@ import { User } from '../../_models/user';
 import { AccountService } from '../../_services/account.service';
 import { MembersService } from '../../_services/members.service';
 import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
+import { TimeagoModule, TimeagoFormatter, TimeagoDefaultFormatter, TimeagoClock, TimeagoDefaultClock } from 'ngx-timeago';
 
 type MemberTab = 'about' | 'photos';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule, PhotoEditorComponent],
+  imports: [CommonModule, FormsModule, PhotoEditorComponent, TimeagoModule],
+  providers: [
+    { provide: TimeagoFormatter, useClass: TimeagoDefaultFormatter },
+    { provide: TimeagoClock, useClass: TimeagoDefaultClock }
+  ],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css'
 })
@@ -23,6 +28,7 @@ export class MemberEditComponent implements OnInit {
 
   member?: Member;
   user?: User;
+
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     if (this.editForm?.dirty) {
@@ -62,8 +68,6 @@ export class MemberEditComponent implements OnInit {
   }
 
   saveChanges() {
-    console.log('ls user:', localStorage.getItem('user'));
-
     if (!this.member) return;
 
     this.membersService.updateMember(this.member).subscribe({

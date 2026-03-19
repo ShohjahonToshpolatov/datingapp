@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../_models/member';
 import { MembersService } from '../../_services/members.service';
 import { SharedModule } from "../../_modules/shared.module";
+import { DatePipe } from '@angular/common';
 
 type MemberTab = 'about' | 'interests' | 'photos' | 'messages';
 
 @Component({
   selector: 'app-member-detail',
-  imports: [SharedModule],
+  imports: [SharedModule, DatePipe],
   templateUrl: './member-detail.component.html',
   styleUrl: './member-detail.component.css'
 })
@@ -36,20 +37,13 @@ export class MemberDetailComponent {
     this.memberService
       .getMember(this.route.snapshot.paramMap.get('username')!)
       .subscribe(member => {
-
-        console.log('member:', member);
-        console.log('member.photos:', member.photos);
-        console.log('first photo:', member.photos?.[0]);
-
         this.member = member;
-
         this.photos = (member.photos ?? [])
           .map((p: any) => p.url ?? p.photoUrl ?? p.imageUrl)
           .filter((u): u is string => !!u);
-
-        console.log('mapped photos:', this.photos);
       });
   }
+
   openPhoto(i: number) {
     this.activeIndex = i;
   }
