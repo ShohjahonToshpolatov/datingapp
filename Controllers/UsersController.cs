@@ -8,6 +8,7 @@ using API.DTOs;
 using AutoMapper;
 using System.Security.Claims;
 using API.Extensions;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -25,9 +26,18 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUseraname = currentUser.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+            }
+
+            var users = await _userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHead(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
             return Ok(users);
         }
 
@@ -59,17 +69,15 @@ namespace API.Controllers
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
             if (user == null) return NotFound();
 
-            // ✅ Supabase: folder berish (tartib uchun)
             var result = await _photoService.AddPhotoAsync(file, $"users/{user.UserName}");
 
-            // ✅ Cloudinarydagi result.Error yo‘q, shuning uchun oddiy tekshiruv
             if (string.IsNullOrWhiteSpace(result.Url) || string.IsNullOrWhiteSpace(result.Path))
                 return BadRequest("Problem uploading photo");
 
             var photo = new Photo
             {
                 Url = result.Url,
-                PublicId = result.Path // ✅ endi PublicId ichida Supabase path saqlanadi
+                PublicId = result.Path
             };
 
             if (user.Photos.Count == 0) photo.IsMain = true;

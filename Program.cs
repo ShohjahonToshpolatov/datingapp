@@ -35,7 +35,7 @@ builder.Services.Configure<SupabaseSettings>(
     builder.Configuration.GetSection("Supabase"));
 
 builder.Services.AddScoped<IPhotoService, PhotoService>();
-
+builder.Services.AddScoped<LogUserActivity>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
