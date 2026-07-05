@@ -1,0 +1,28 @@
+<div class="mb-3">
+    <input class="form-control" [type]="type" [formControl]="control"
+        [class.is-invalid]="control.touched && control.invalid" [placeholder]="label" />
+
+    @if (control.errors?.['required']) {
+    <div class="invalid-feedback">
+        Please enter a {{ label }}
+    </div>
+    }
+
+    @if (control.errors?.['minlength']) {
+    <div class="invalid-feedback">
+        {{ label }} must be at least {{ control.errors?.['minlength']?.requiredLength }} characters
+    </div>
+    }
+
+    @if (control.errors?.['maxlength']) {
+    <div class="invalid-feedback">
+        {{ label }} must be at most {{ control.errors?.['maxlength']?.requiredLength }} characters
+    </div>
+    }
+
+    @if (control.errors?.['notMatching']) {
+    <div class="invalid-feedback">
+        Passwords do not match
+    </div>
+    }
+</div>
