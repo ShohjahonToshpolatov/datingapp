@@ -3,10 +3,11 @@ import { Member } from '../_models/member';
 import { MembersService } from '../_services/members.service';
 import { ButtonRadioDirective } from "ngx-bootstrap/buttons";
 import { FormsModule } from '@angular/forms';
+import { MemberCardComponent } from '../members/member-card/member-card.component';
 
 @Component({
   selector: 'app-lists',
-  imports: [ButtonRadioDirective, FormsModule],
+  imports: [ButtonRadioDirective, FormsModule, MemberCardComponent],
   templateUrl: './lists.component.html',
   styleUrl: './lists.component.css'
 })

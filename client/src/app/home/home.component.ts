@@ -14,10 +14,6 @@ export class HomeComponent {
     this.registerMode = !this.registerMode
   }
 
-  ngOnInit(): void {
-
-  }
-
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
   }

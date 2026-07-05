@@ -1,41 +1,42 @@
 <div class="text-center mt-3">
-    <h2>Your matches - {{pagination?.totalItems}} found</h2>
+    <h2>Your matches <span class="text-muted fs-6">— {{pagination?.totalItems}} found</span></h2>
 </div>
 
 @if (userParams) {
 <div class="container mt-3">
-    <form #form="ngForm" class="d-flex mb-3" (ngSubmit)="onFilterSubmit()" autocomplete="off">
-        <div class="d-flex mx-2">
-            <label class="col-form-label">Age from: </label>
-            <input type="number" class="form-control ms-1" style="width: 70px;" name="minAge"
+    <form #form="ngForm" class="filter-bar d-flex flex-wrap align-items-center gap-3 mb-3"
+        (ngSubmit)="onFilterSubmit()" autocomplete="off">
+        <div class="d-flex align-items-center gap-2">
+            <label class="col-form-label mb-0">Age from</label>
+            <input type="number" class="form-control" style="width: 70px;" name="minAge"
                 [(ngModel)]="userParams.minAge">
         </div>
 
-        <div class="d-flex mx-2">
-            <label class="col-form-label">Age to: </label>
-            <input type="number" class="form-control ms-1" style="width: 70px;" name="maxAge"
+        <div class="d-flex align-items-center gap-2">
+            <label class="col-form-label mb-0">to</label>
+            <input type="number" class="form-control" style="width: 70px;" name="maxAge"
                 [(ngModel)]="userParams.maxAge">
         </div>
 
-        <div class="d-flex px-2">
-            <label class="col-form-label me-2">Show: </label>
-            <select name="gender" style="width: 130px" class="form-select ms-1" [(ngModel)]="userParams.gender">
+        <div class="d-flex align-items-center gap-2">
+            <label class="col-form-label mb-0">Show</label>
+            <select name="gender" style="width: 130px" class="form-select" [(ngModel)]="userParams.gender">
                 @for (gender of genderList; track $index) {
                 <option [value]="gender.value">{{gender.display}}</option>
                 }
             </select>
         </div>
 
-        <button class="btn btn-primary ms-1">Apply Filters</button>
-        <button type="button" (click)="resetFilters()" class="btn btn-info ms-1">
-            Reset Filters
+        <button class="btn btn-primary">Apply</button>
+        <button type="button" (click)="resetFilters()" class="btn btn-outline-secondary">
+            Reset
         </button>
 
-        <div class="col">
-            <div class="btn-group float-end" btnRadioGroup name="orderBy" ngDefaultControl
-                [(ngModel)]="userParams.orderBy" (ngModelChange)="loadMembers()">
-                <button class="btn btn-primary" btnRadio="lastActive" type="button">Last Active</button>
-                <button class="btn btn-primary" btnRadio="created" type="button">Newest Member</button>
+        <div class="ms-auto">
+            <div class="btn-group" btnRadioGroup name="orderBy" ngDefaultControl [(ngModel)]="userParams.orderBy"
+                (ngModelChange)="loadMembers()">
+                <button class="btn btn-outline-primary" btnRadio="lastActive" type="button">Last Active</button>
+                <button class="btn btn-outline-primary" btnRadio="created" type="button">Newest Member</button>
             </div>
         </div>
     </form>

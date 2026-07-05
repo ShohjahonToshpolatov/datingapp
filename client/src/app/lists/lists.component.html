@@ -3,25 +3,28 @@
 </div>
 
 <div class="container mt-3">
-    <div class="d-flex">
+    <div class="d-flex justify-content-center">
         <div class="btn-group" name="predicate">
 
-            <button class="btn btn-primary" btnRadio="liked" [(ngModel)]="predicate" (click)="loadLikes()">
+            <button class="btn btn-outline-primary" btnRadio="liked" [(ngModel)]="predicate" (click)="loadLikes()">
                 Members I like
             </button>
 
-            <button class="btn btn-primary" btnRadio="likedBy" [(ngModel)]="predicate" (click)="loadLikes()">
+            <button class="btn btn-outline-primary" btnRadio="likedBy" [(ngModel)]="predicate" (click)="loadLikes()">
                 Members who like me
             </button>
 
         </div>
     </div>
 
-    <div class="row mt-3">
-        @for (member of members; track $index) {
-        <div class="col-2">
-            <p>{{ member.knownAs }}</p>
-            <p>{{ member.username }}</p>
+    @if (members.length === 0) {
+    <p class="text-muted text-center mt-4">Nothing here yet.</p>
+    }
+
+    <div class="row justify-content-center mt-4">
+        @for (member of members; track member.id) {
+        <div class="col-6 col-md-4 col-lg-2 mb-4">
+            <app-member-card [member]="member"></app-member-card>
         </div>
         }
     </div>

@@ -1,22 +1,23 @@
-<div class="container mt-5">
+<div class="hero">
     @if (!registerMode) {
-    <div style="text-align: center;">
+    <div class="hero-content">
+        <span class="hero-badge"><i class="fa fa-heart"></i> New here? It only takes a minute</span>
         <h1>Find your match</h1>
-        <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2"
-                style="margin-right: 7px;">Register</button>
-            <button class="btn btn-primary btn-info btn-lg">Learn more</button>
+        <p class="lead">
+            Real people, real conversations, real-time. Create a profile, browse matches nearby
+            and start chatting the moment you connect.
+        </p>
+        <div class="hero-actions">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg">Get started</button>
+            <span class="hero-hint">Already have an account? Log in from the top right.</span>
         </div>
     </div>
     }
 
     @if (registerMode) {
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
-            </div>
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
         </div>
     </div>
     }

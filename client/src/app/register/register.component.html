@@ -1,5 +1,5 @@
-<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-    <h2 class="text-center text-primary">Sign up</h2>
+<form class="register-card" [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+    <h2 class="text-center">Create your account</h2>
     <hr>
 
     <div class="mb-3">
@@ -46,8 +46,8 @@
         </div>
     </div>
     }
-    <div class="text-center">
-        <button class="btn btn-success me-2" type="submit" [disabled]="!registerForm.valid">Register</button>
-        <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <div class="text-center d-flex gap-2 justify-content-center">
+        <button class="btn btn-primary flex-fill" type="submit" [disabled]="!registerForm.valid">Register</button>
+        <button class="btn btn-outline-secondary flex-fill" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>

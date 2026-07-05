@@ -5,13 +5,12 @@ import { AccountService } from '../_services/account.service';
 import { AsyncPipe } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
-import { TitleCasePipe } from '@angular/common';
 import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, NgbDropdownModule, AsyncPipe, RouterLink, RouterLinkActive, TitleCasePipe],
+  imports: [FormsModule, NgbDropdownModule, AsyncPipe, RouterLink, RouterLinkActive],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })

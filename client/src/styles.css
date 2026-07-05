@@ -1,49 +1,114 @@
-/* Member detail tabs (ngx-bootstrap tabs) .tab-panel {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
+:root {
+    --brand-50: #fff1f4;
+    --brand-100: #ffe1e8;
+    --brand-400: #ff7a9c;
+    --brand-500: #fb5385;
+    --brand-600: #e8407a;
+    --brand-700: #c22d63;
+    --ink-900: #241931;
+    --ink-600: #5c5468;
+    --bg: #fdf7f8;
+    --surface: #ffffff;
+    --border-soft: rgba(36, 25, 49, 0.08);
+    --shadow-sm: 0 2px 8px rgba(36, 25, 49, 0.06);
+    --shadow-md: 0 12px 28px rgba(36, 25, 49, 0.12);
+    --radius-lg: 1rem;
+    --radius-md: 0.65rem;
+
+    --bs-primary: var(--brand-500);
+    --bs-primary-rgb: 251, 83, 133;
+    --bs-link-color: var(--brand-600);
+    --bs-link-hover-color: var(--brand-700);
 }
 
-.nav-tabs>li.open,
-.member-tabset>.nav-tabs>li:hover {
-    border-bottom: 4px solid #fbcdcf;
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brand-400) transparent;
 }
 
-.member-tabset>.nav-tabs>li.open>a,
-.member-tabset>.nav-tabs>li:hover>a {
-    border: 0;
-    background: none !important;
-    color: #333333;
+body {
+    background: var(--bg);
+    color: var(--ink-900);
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 }
 
-.member-tabset>.nav-tabs>li.open>a>i,
-.member-tabset>.nav-tabs>li:hover>a>i {
-    color: #a6a6a6;
+h1, h2, h3, h4, h5, h6 {
+    color: var(--ink-900);
+    font-weight: 700;
 }
 
-.member-tabset>.nav-tabs>li.open .dropdown-menu,
-.member-tabset>.nav-tabs>li:hover .dropdown-menu {
-    margin-top: 0px;
+a {
+    color: var(--brand-600);
 }
 
-.member-tabset>.nav-tabs>li.active {
-    border-bottom: 4px solid #E95420;
-    position: relative;
+a:hover {
+    color: var(--brand-700);
 }
 
-.member-tabset>.nav-tabs>li.active>a {
-    border: 0;
-    color: #333333;
+.btn-primary {
+    background-color: var(--brand-500);
+    border-color: var(--brand-500);
 }
 
-.member-tabset>.nav-tabs>li.active>a>i {
-    color: #404040;
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--brand-600) !important;
+    border-color: var(--brand-600) !important;
 }
 
-.member-tabset>.tab-content {
-    margin-top: -3px;
-    background-color: #fff;
-    border: 0;
-    border-top: 1px solid #eee;
-    padding: 15px 0;
-} */
+.btn-outline-primary {
+    color: var(--brand-600);
+    border-color: var(--brand-500);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--brand-500);
+    border-color: var(--brand-500);
+}
+
+.btn {
+    border-radius: var(--radius-md);
+    font-weight: 600;
+}
+
+.card {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--brand-400);
+    box-shadow: 0 0 0 0.2rem rgba(251, 83, 133, 0.18);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--brand-500);
+    border-color: var(--brand-500);
+}
+
+.pagination .page-link {
+    color: var(--brand-600);
+}
+
+.nav-link.active {
+    color: var(--brand-600) !important;
+    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--brand-400);
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}

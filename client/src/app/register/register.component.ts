@@ -1,6 +1,5 @@
-import { JsonPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 import { TextInputComponent } from '../_forms/text-input/text-input.component';
@@ -10,12 +9,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, TextInputComponent, JsonPipe, DatePickerComponent],
+  imports: [ReactiveFormsModule, TextInputComponent, DatePickerComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  @Input() usersFromHomeComponent: any;
   @Output() cancelRegister = new EventEmitter<boolean>();
 
   private accountService = inject(AccountService);
@@ -67,8 +65,6 @@ export class RegisterComponent {
     this.accountService.register(model).subscribe({
       next: () => this.router.navigateByUrl('/members'),
       error: (err) => {
-        console.log(err);
-
         if (err?.error?.errors) {
           this.validationErrors = Object.values(err.error.errors).flat() as string[];
           return;
@@ -86,11 +82,5 @@ export class RegisterComponent {
 
   cancel() {
     this.cancelRegister.emit(false);
-  }
-
-  private getDateOnly(dob: string | undefined) {
-    if (!dob) return;
-    let theDob = new Date(dob);
-    return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
   }
 }

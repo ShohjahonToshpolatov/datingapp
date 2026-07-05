@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark app-nav sticky-top">
     <div class="container-fluid">
 
-        <a class="navbar-brand" routerLink="/" routerLinkActive="active">
+        <a class="navbar-brand app-brand" routerLink="/">
+            <i class="fa fa-heart"></i>
             Dating App
         </a>
 
@@ -9,30 +10,34 @@
             @if (accountService.currentUser$ | async) {
             <ng-container>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+                    <a class="nav-link" routerLink="/members" routerLinkActive="active">
+                        <i class="fa fa-user me-1"></i>Matches
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">
+                        <i class="fa fa-heart me-1"></i>Lists
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">
+                        <i class="fa fa-envelope me-1"></i>Messages
+                    </a>
                 </li>
 
                 @if ((accountService.currentUser$ | async); as user) {
                 @if (isAdmin(user)) {
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+                    <a class="nav-link" routerLink="/admin" routerLinkActive="active">
+                        <i class="fa fa-cog me-1"></i>Admin
+                    </a>
                 </li>
                 }
                 }
             </ng-container>
             }
-
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/error" routerLinkActive="active">Errors</a>
-            </li>
         </ul>
 
         @if ((accountService.currentUser$ | async); as user) {
@@ -41,8 +46,7 @@
 
                 <button class="nav-link dropdown-toggle btn btn-link d-flex align-items-center gap-2" ngbDropdownToggle
                     type="button" style="text-decoration:none;">
-                    <img [src]="user.photoUrl || 'assets/user.png'" alt="user photo" class="rounded-circle"
-                        style="width:40px; height:40px; object-fit:cover;" />
+                    <img [src]="user.photoUrl || 'assets/user.png'" alt="user photo" class="rounded-circle nav-avatar" />
                     <span>Welcome {{ user.knownAs }}</span>
                 </button>
 
@@ -59,14 +63,14 @@
         }
 
         @if (!(accountService.currentUser$ | async)) {
-        <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
-            <input class="form-control me-2" name="username" [(ngModel)]="model.Username" type="text"
+        <form #loginForm="ngForm" class="d-flex gap-2" (ngSubmit)="login()" autocomplete="off">
+            <input class="form-control" name="username" [(ngModel)]="model.Username" type="text"
                 placeholder="Username" />
 
-            <input class="form-control me-2" name="password" [(ngModel)]="model.Password" type="password"
+            <input class="form-control" name="password" [(ngModel)]="model.Password" type="password"
                 placeholder="Password" />
 
-            <button class="btn btn-success" type="submit">Login</button>
+            <button class="btn btn-light fw-semibold" type="submit">Login</button>
         </form>
         }
 
