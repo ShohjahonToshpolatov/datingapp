@@ -17,6 +17,10 @@ namespace API.Data
 
         public DbSet<Connection> Connections { get; set; }
 
+        public DbSet<AppRole> Roles { get; set; }
+
+        public DbSet<AppUserRole> UserRoles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -57,6 +61,21 @@ namespace API.Data
             builder.Entity<Group>()
                 .HasMany(g => g.Connections)
                 .WithOne();
+
+            builder.Entity<AppUserRole>()
+                .HasKey(ur => new { ur.AppUserId, ur.AppRoleId });
+
+            builder.Entity<AppUserRole>()
+                .HasOne(ur => ur.AppUser)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.AppUserId)
+                .IsRequired();
+
+            builder.Entity<AppUserRole>()
+                .HasOne(ur => ur.AppRole)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.AppRoleId)
+                .IsRequired();
         }
     }
 }

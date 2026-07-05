@@ -4,10 +4,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using API.Data;          // DataContext uchun
-using API.DTOs;          // RegisterDto, LoginDto, UserDto
-using API.Entities;      // AppUser entity
-using API.Interfaces;    // ITokenService
+using API.Data;
+using API.DTOs;
+using API.Entities;
+using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +48,7 @@ namespace API.Controllers
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
@@ -81,7 +81,7 @@ namespace API.Controllers
             var userDto = new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url ?? string.Empty,
                 KnownAs = user.KnownAs,
                 Gender = user.Gender

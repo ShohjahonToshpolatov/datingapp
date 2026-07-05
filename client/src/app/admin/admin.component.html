@@ -1,0 +1,53 @@
+<div class="admin-page">
+    <h2>Admin</h2>
+
+    <div class="btn-group mb-3" name="section">
+        <button class="btn btn-outline-primary" btnRadio="users" [(ngModel)]="section">Manage users</button>
+        <button class="btn btn-outline-primary" btnRadio="photos" [(ngModel)]="section">Photo moderation</button>
+    </div>
+
+    @if (section === 'users') {
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>Username</th>
+                @for (role of availableRoles; track role) {
+                <th>{{ role }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track user.id) {
+            <tr>
+                <td>{{ user.username }}</td>
+                @for (role of availableRoles; track role) {
+                <td>
+                    <input type="checkbox" class="form-check-input" [checked]="user.roles.includes(role)"
+                        (change)="toggleRole(user, role)">
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+
+    @if (section === 'photos') {
+    @if (photos.length === 0) {
+    <p class="text-muted">No photos waiting for approval.</p>
+    }
+
+    <div class="photo-grid">
+        @for (photo of photos; track photo.id) {
+        <div class="photo-card">
+            <img [src]="photo.url" [alt]="photo.username">
+            <p class="photo-username">{{ photo.username }}</p>
+            <div class="btn-group w-100">
+                <button class="btn btn-sm btn-success" (click)="approvePhoto(photo)">Approve</button>
+                <button class="btn btn-sm btn-danger" (click)="rejectPhoto(photo)">Reject</button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>

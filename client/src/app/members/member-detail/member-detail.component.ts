@@ -57,6 +57,7 @@ export class MemberDetailComponent {
       .subscribe(member => {
         this.member = member;
         this.photos = (member.photos ?? [])
+          .filter((p: any) => p.isApproved !== false)
           .map((p: any) => p.url ?? p.photoUrl ?? p.imageUrl)
           .filter((u): u is string => !!u);
       });

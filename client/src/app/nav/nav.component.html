@@ -19,6 +19,14 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
                 </li>
+
+                @if ((accountService.currentUser$ | async); as user) {
+                @if (isAdmin(user)) {
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+                </li>
+                }
+                }
             </ng-container>
             }
 

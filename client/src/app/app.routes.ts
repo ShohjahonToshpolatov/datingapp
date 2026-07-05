@@ -5,11 +5,13 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AdminGuard } from './_guards/admin.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +24,8 @@ export const routes: Routes = [
             { path: 'members/:username', component: MemberDetailComponent },
             { path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard] },
             { path: 'messages', component: MessagesComponent },
-            { path: 'lists', component: ListsComponent }
+            { path: 'lists', component: ListsComponent },
+            { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] }
         ]
     },
     { path: 'error', component: TestErrorsComponent },

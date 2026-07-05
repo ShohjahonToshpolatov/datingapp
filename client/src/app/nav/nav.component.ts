@@ -6,6 +6,7 @@ import { AsyncPipe } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { TitleCasePipe } from '@angular/common';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -21,20 +22,15 @@ export class NavComponent {
   router = inject(Router)
   toastr = inject(ToastrService)
 
-  ngOnInit(): void {
-
+  isAdmin(user: User) {
+    const roles = this.accountService.getRoles(user.token);
+    return roles.includes('Admin') || roles.includes('Moderator');
   }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: response => {
-        this.router.navigateByUrl('/members')
-        localStorage.setItem('token', response.token);
-      },
-      error: error => {
-        console.log(error)
-        this.toastr.error(error.error)
-      }
+      next: () => this.router.navigateByUrl('/members'),
+      error: error => this.toastr.error(error.error)
     })
   }
 

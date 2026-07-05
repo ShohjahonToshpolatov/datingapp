@@ -24,5 +24,6 @@ namespace API.Entities
 
         public List<UserLike>? LikedByUsers { get; set; }
         public List<UserLike>? LikedUsers { get; set; }
+        public ICollection<AppUserRole> UserRoles { get; set; } = new List<AppUserRole>();
     }
 }

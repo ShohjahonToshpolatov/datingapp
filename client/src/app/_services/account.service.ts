@@ -57,4 +57,11 @@ export class AccountService {
     this.currentUserSource.next(null!);
     this.presenceService.stopHubConnection();
   }
+
+  getRoles(token: string): string[] {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const role = payload.role ?? payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    if (!role) return [];
+    return Array.isArray(role) ? role : [role];
+  }
 }
