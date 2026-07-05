@@ -20,7 +20,9 @@ namespace API.Helpers
                 opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
-            CreateMap<RegisterDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>()
+                .ForMember(dest => dest.DateOfBirth, opt =>
+                opt.MapFrom(src => src.DateOfBirth!.Value.ToDateTime(TimeOnly.MinValue)));
         }
     }
 }

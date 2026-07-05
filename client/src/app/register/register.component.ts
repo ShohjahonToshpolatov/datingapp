@@ -61,6 +61,7 @@ export class RegisterComponent {
     }
 
     const model = this.registerForm.getRawValue();
+    model.dateOfBirth = this.getDateOnly(model.dateOfBirth);
 
     this.accountService.register(model).subscribe({
       next: () => this.router.navigateByUrl('/members'),
@@ -82,5 +83,11 @@ export class RegisterComponent {
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  private getDateOnly(dob: string | Date | undefined) {
+    if (!dob) return dob;
+    const theDob = new Date(dob);
+    return new Date(theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())).toISOString().slice(0, 10);
   }
 }
