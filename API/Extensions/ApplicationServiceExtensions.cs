@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
@@ -21,20 +17,26 @@ namespace API.Extensions
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:4200");
+                });
+            });
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-            services.Configure<CloudinarySettings>(
-                config.GetSection("CloudinarySettings")
-            );
-
-            services.AddScoped<IPhotoService, PhotoService>();
-
+            services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<LogUserActivity>();
+
+            services.Configure<SupabaseSettings>(config.GetSection("Supabase"));
+            services.AddScoped<IPhotoService, PhotoService>();
 
             return services;
         }

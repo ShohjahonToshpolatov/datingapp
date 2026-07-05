@@ -1,10 +1,11 @@
 <div class="card mb-4">
     <div class="card-img-wrapper">
-        <img class="card-img-top img-thumbnail" [src]="member.photoUrl || '/user.png'" alt="{{ member.username }}" />
+        <img class="card-img-top img-thumbnail" [src]="member.photoUrl || '/user.png'" alt="{{ member.username }}">
         <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item"><button class="btn btn-primary" routerLink="/members/{{member.username}}"><i
                         class="fa fa-user"></i></button></li>
-            <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-heart"></i></button></li>
+            <li class="list-inline-item"><button (click)="addLike(member)" class="btn btn-primary"><i
+                        class="fa fa-heart"></i></button></li>
             <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-envelope"></i></button></li>
         </ul>
     </div>

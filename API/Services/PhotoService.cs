@@ -15,6 +15,7 @@ namespace API.Services
 
         public PhotoService(IOptions<SupabaseSettings> options)
         {
+
             _settings = options.Value;
 
             if (string.IsNullOrWhiteSpace(_settings.Url))
@@ -48,16 +49,14 @@ namespace API.Services
             folder = (folder ?? "").Trim().Trim('/');
             var path = string.IsNullOrEmpty(folder) ? fileName : $"{folder}/{fileName}";
 
-            // bytes
             await using var stream = file.OpenReadStream();
             using var ms = new MemoryStream();
             await stream.CopyToAsync(ms);
             var bytes = ms.ToArray();
 
-            // ✅ Upload (Supabase.Storage) — ko‘p versiyalarda shunaqa:
             await client.Storage
                 .From(_settings.Bucket)
-                .Upload(bytes, path); // optionssiz sinab ko‘ring
+                .Upload(bytes, path);
 
             var publicUrl = client.Storage
                 .From(_settings.Bucket)

@@ -9,9 +9,6 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  setMainPhoto(photoId: number) {
-    throw new Error('Method not implemented.');
-  }
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();

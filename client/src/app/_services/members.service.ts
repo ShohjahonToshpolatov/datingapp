@@ -22,7 +22,8 @@ export class MembersService {
       next: user => {
         if (user) {
           this.userParams = new UserParams(user);
-          this.user = user;
+          this.user = user
+
         }
       }
     });
@@ -108,6 +109,18 @@ export class MembersService {
       this.baseUrl + 'users/delete-photo/' + photoId,
       this.getHttpOptions()
     );
+  }
+
+  addLike(username: string) {
+    return this.http.post(
+      this.baseUrl + 'likes/' + username,
+      {},
+      this.getHttpOptions()
+    );
+  }
+
+  getLikes(predicate: string) {
+    return this.http.get<Member[]>(this.baseUrl + 'likes?predicate=' + predicate, this.getHttpOptions());
   }
 
   private getHttpOptions() {
