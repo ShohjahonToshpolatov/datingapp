@@ -1,0 +1,6 @@
+[*.cs]
+
+dotnet_diagnostic.CA1051.severity = none
+
+# IDE0320: Make anonymous function static
+csharp_prefer_static_anonymous_function = true
