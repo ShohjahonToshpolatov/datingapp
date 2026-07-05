@@ -5,6 +5,7 @@ using API.Data;
 using API.Interfaces;
 using API.Services;
 using API.Helpers;
+using API.SignalR;
 
 namespace API.Extensions
 {
@@ -24,7 +25,8 @@ namespace API.Extensions
                     policy
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:4200");
+                        .WithOrigins("http://localhost:4200")
+                        .AllowCredentials();
                 });
             });
 
@@ -33,10 +35,14 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILikesRepository, LikesRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<LogUserActivity>();
 
             services.Configure<SupabaseSettings>(config.GetSection("Supabase"));
             services.AddScoped<IPhotoService, PhotoService>();
+
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
 
             return services;
         }

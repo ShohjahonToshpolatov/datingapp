@@ -1,0 +1,47 @@
+.thread {
+    display: flex;
+    flex-direction: column;
+    height: 420px;
+}
+
+.thread-scroll {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0.25rem;
+}
+
+.bubble-row {
+    display: flex;
+}
+
+.bubble-row.mine {
+    justify-content: flex-end;
+}
+
+.bubble {
+    max-width: 70%;
+    padding: 0.5rem 0.85rem;
+    border-radius: 1rem;
+    background: #f1f3f5;
+}
+
+.bubble-row.mine .bubble {
+    background: var(--bs-primary, #0d6efd);
+    color: #fff;
+}
+
+.bubble-time {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.15rem;
+}
+
+.thread-form {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+}

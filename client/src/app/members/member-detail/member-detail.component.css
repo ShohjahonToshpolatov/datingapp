@@ -97,3 +97,16 @@
     border-color: #E95420;
     opacity: 1;
 }
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #adb5bd;
+    margin-right: 0.4rem;
+}
+
+.status-dot.online {
+    background: #2ecc71;
+}

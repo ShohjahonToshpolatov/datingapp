@@ -5,6 +5,13 @@
             <img [src]="member.photoUrl || 'assets/user.png'" [alt]="member.knownAs" class="card-img-top img-thumbnail">
 
             <div class="card-body">
+                <div><strong>Status:</strong>
+                    <p>
+                        <span class="status-dot" [class.online]="isOnline()"></span>
+                        {{ isOnline() ? 'Online now' : 'Offline' }}
+                    </p>
+                </div>
+
                 <div><strong>Location:</strong>
                     <p>{{member.city}}, {{member.country}}</p>
                 </div>
@@ -24,8 +31,8 @@
 
             <div class="card-footer">
                 <div class="btn-group d-flex">
-                    <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-success">Message</button>
+                    <button class="btn btn-primary" (click)="addLike()">Like</button>
+                    <button class="btn btn-success" (click)="setTab('messages')">Message</button>
                 </div>
             </div>
         </div>
@@ -105,7 +112,7 @@
             }
 
             @if (activeTab === 'messages') {
-            <p>Messages will go here</p>
+            <app-member-messages [username]="member.username" />
             }
 
         </div>

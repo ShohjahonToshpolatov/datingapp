@@ -1,0 +1,57 @@
+<div class="messages-page">
+    <div class="messages-header">
+        <h2>Messages</h2>
+
+        <div class="btn-group" name="container">
+            <button class="btn btn-outline-primary" btnRadio="Unread" [(ngModel)]="container" (click)="loadMessages()">
+                Unread
+            </button>
+            <button class="btn btn-outline-primary" btnRadio="Inbox" [(ngModel)]="container" (click)="loadMessages()">
+                Inbox
+            </button>
+            <button class="btn btn-outline-primary" btnRadio="Outbox" [(ngModel)]="container" (click)="loadMessages()">
+                Outbox
+            </button>
+        </div>
+    </div>
+
+    @if (!loading && messages.length === 0) {
+    <p class="text-muted">No messages here yet.</p>
+    }
+
+    <div class="message-list">
+        @for (message of messages; track message.id) {
+        <div class="message-row" [class.unread]="!message.dateRead && container === 'Unread'">
+            <a [routerLink]="['/members', container === 'Outbox' ? message.recipientUsername : message.senderUsername]">
+                <img class="message-avatar"
+                    [src]="(container === 'Outbox' ? message.recipientPhotoUrl : message.senderPhotoUrl) || '/user.png'"
+                    [alt]="container === 'Outbox' ? message.recipientUsername : message.senderUsername">
+            </a>
+
+            <div class="message-body">
+                <a [routerLink]="['/members', container === 'Outbox' ? message.recipientUsername : message.senderUsername]"
+                    class="message-username">
+                    {{ container === 'Outbox' ? message.recipientUsername : message.senderUsername }}
+                </a>
+                <p class="message-content">{{ message.content }}</p>
+            </div>
+
+            <div class="message-meta">
+                <span>{{ message.messageSent | timeago }}</span>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteMessage(message.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+
+    @if (pagination && pagination.totalPages > 1) {
+    <div class="d-flex justify-content-center mt-3">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+            [(ngModel)]="pageNumber" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+            firstText="&laquo;" lastText="&raquo;">
+        </pagination>
+    </div>
+    }
+</div>

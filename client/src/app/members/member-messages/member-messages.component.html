@@ -1,0 +1,24 @@
+<div class="thread">
+    <div class="thread-scroll" #scrollContainer>
+        @if (messageService.messageThread().length === 0) {
+        <p class="text-muted m-0">No messages yet. Say hello!</p>
+        }
+
+        @for (message of messageService.messageThread(); track message.id) {
+        <div class="bubble-row" [class.mine]="message.senderUsername === currentUsername">
+            <div class="bubble">
+                <p class="m-0">{{ message.content }}</p>
+                <span class="bubble-time">{{ message.messageSent | timeago }}</span>
+            </div>
+        </div>
+        }
+    </div>
+
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" class="thread-form">
+        <input class="form-control" name="messageContent" [(ngModel)]="messageContent" placeholder="Type a message..."
+            autocomplete="off" required>
+        <button class="btn btn-primary" type="submit" [disabled]="!messageForm.valid">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </form>
+</div>
