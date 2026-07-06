@@ -74,5 +74,11 @@
         </form>
         }
 
+        <button class="btn btn-link theme-toggle ms-2" type="button" (click)="themeService.toggleTheme()"
+            [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+            [title]="themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+            <i class="fa" [ngClass]="themeService.theme() === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
+        </button>
+
     </div>
 </nav>

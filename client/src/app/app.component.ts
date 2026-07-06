@@ -4,6 +4,7 @@ import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerComponent } from "ngx-spinner";
+import { ThemeService } from './_services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { NgxSpinnerComponent } from "ngx-spinner";
 export class AppComponent implements OnInit {
   title = 'client'
   accountService = inject(AccountService)
+  private themeService = inject(ThemeService)
 
   ngOnInit(): void {
     this.setCurrentUser()

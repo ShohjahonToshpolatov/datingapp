@@ -19,6 +19,29 @@
     --bs-primary-rgb: 251, 83, 133;
     --bs-link-color: var(--brand-600);
     --bs-link-hover-color: var(--brand-700);
+    --bs-body-bg: var(--bg);
+    --bs-body-color: var(--ink-900);
+}
+
+[data-bs-theme="dark"] {
+    --ink-900: #f2eef7;
+    --ink-600: #b8aec4;
+    --bg: #17121d;
+    --surface: #241d2d;
+    --border-soft: rgba(242, 238, 247, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.5);
+
+    --bs-body-bg: var(--bg);
+    --bs-body-color: var(--ink-900);
+    --bs-card-bg: var(--surface);
+    --bs-border-color: var(--border-soft);
+    --bs-dropdown-bg: var(--surface);
+    --bs-dropdown-link-color: var(--ink-900);
+    --bs-dropdown-link-hover-bg: rgba(255, 255, 255, 0.06);
+    --bs-input-bg: var(--surface);
+    --bs-input-color: var(--ink-900);
+    --bs-input-border-color: var(--border-soft);
 }
 
 * {

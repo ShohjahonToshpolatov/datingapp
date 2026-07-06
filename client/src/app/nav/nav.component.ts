@@ -2,15 +2,16 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../_models/user';
+import { ThemeService } from '../_services/theme.service';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, NgbDropdownModule, AsyncPipe, RouterLink, RouterLinkActive],
+  imports: [FormsModule, NgbDropdownModule, AsyncPipe, NgClass, RouterLink, RouterLinkActive],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
@@ -18,6 +19,7 @@ export class NavComponent {
   model: any = {};
 
   accountService = inject(AccountService);
+  themeService = inject(ThemeService);
   router = inject(Router)
   toastr = inject(ToastrService)
 
